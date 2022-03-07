@@ -32,7 +32,8 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        //
+        $category= $this->categoryModel->show($id);
+        return view('backend.category.detail', compact('category'));
     }
 
     public function edit($id)
