@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\UserModel;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public $userModel;
+
+    public function __construct(UserModel $userModel)
+    {
+        $this->userModel = $userModel;
+    }
+
     public function index()
     {
-        //
+        $users=$this->userModel->index();
+        return view('backend.user.index', compact('users'));
     }
 
     /**

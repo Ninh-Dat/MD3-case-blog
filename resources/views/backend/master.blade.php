@@ -1,4 +1,5 @@
 <a href="{{route('categories.index')}}">A</a>
+<a href="{{route('users.index')}}">B</a>
 {{--<!DOCTYPE html>--}}
 {{--<html lang="en">--}}
 {{--<head>--}}
