@@ -8,13 +8,20 @@ class BaseModel
 {
     public $table;
 
-    public function index(){
-        $data= DB::table($this->table)->get();
-        return $data;
-    }
-    public function show($id){
-        $data = DB::table($this->table)->where('id',$id)->first();
+    public function index()
+    {
+        $data = DB::table($this->table)->get();
         return $data;
     }
 
+    public function show($id)
+    {
+        $data = DB::table($this->table)->where('id', $id)->first();
+        return $data;
+    }
+
+    public function destroy($id)
+    {
+        DB::table($this->table)->where('id', $id)->delete();
+    }
 }

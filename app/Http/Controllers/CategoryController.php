@@ -48,6 +48,7 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        //
+        $this->categoryModel->destroy($id);
+        return redirect()->route('categories.index');
     }
 }

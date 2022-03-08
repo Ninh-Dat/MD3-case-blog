@@ -21,11 +21,13 @@ class CategoriesSeeder extends Seeder
         $category->save();
 
         $category= new Categories();
+
         $category->name = "Bbbb";
         $category->description = "bbb";
         $category->save();
 
         $category= new Categories();
+
         $category->name = "Cccc";
         $category->description = "ccc";
         $category->save();
