@@ -61,7 +61,7 @@ Route::middleware('checkAuth')->group(function (){
 });
 
 
-Route::get("/register",[AuthController::class,'showForm'])->name("showForm");
+Route::get("/register",[AuthController::class,'showFormRegister'])->name("showForm");
 Route::post("/register",[AuthController::class,'register'])->name("register")->middleware('checkRegister');
 
 Route::get("/login",[AuthController::class,'showFormLogin'])->name("showFormLogin");
