@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Categories;
 use App\Models\User;
-use App\Repositories\BlogModel;
+use App\Repositories\BlogRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,7 +13,7 @@ class BlogController extends Controller
 {
 //    public $blogModel;
 //
-//    public function __construct(BlogModel $blogModel)
+//    public function __construct(BlogRepository $blogModel)
 //    {
 //        $this->blogModel=$blogModel;
 //    }
@@ -26,8 +26,9 @@ class BlogController extends Controller
 
     public function create()
     {
+        $users = User::all();
         $categories = Categories::all();
-        return view('backend.blog.create', compact('categories'));
+        return view('backend.blog.create', compact(['categories','users']));
     }
 
     public function store(Request $request)
@@ -37,6 +38,7 @@ class BlogController extends Controller
         $blog->title = $request->title;
         $blog->content = $request->input('content');
         $blog->category_id = $request->select;
+        $blog->user_id = $request->user;
         $blog->save();
         return redirect()->route('blogs.index');
     }
@@ -50,9 +52,10 @@ class BlogController extends Controller
 
     public function edit($id)
     {
+        $users =User::all();
         $categories = Categories::all();
         $blog = Blog::all()->where('id',$id)->first();
-        return view('backend.blog.update',compact(['id','blog','categories']));
+        return view('backend.blog.update',compact(['id','blog','categories','users']));
     }
 
     public function update(Request $request, $id)
@@ -62,6 +65,7 @@ class BlogController extends Controller
         $blog->title = $request->title;
         $blog->content = $request->input('content');
         $blog->category_id = $request->select;
+        $blog->user_id = $request->user;
         $blog->save();
         return redirect()->route('blogs.index', compact('blog'));
     }

@@ -2,42 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Service\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    public function showFormLogin(){
+    public $userService;
+    public function __construct(UserService $userService)
+    {
+        $this->userService =$userService;
+    }
+
+    public function showFormLogin()
+    {
         return view('backend.auth.login');
     }
-    public function login(Request $request){
 
-        $user = $request->only('email','password');
-        if (Auth::attempt($user)){
-            return view('backend.master');
-        }
-        else{
-            Session::flash('msg','Tài khoản không đúng');
+    public function login(Request $request){
+        if ($this->userService->login($request)){
+            return redirect()->route('blogs.index');
+        } else {
+            Session::flash('msg', 'Tài khoản, mạt khẩu không đúng');
             return redirect()->back();
         }
     }
 
-    public function showFormRegister(){
-        return view('backend.auth.register');
+    public function showFormRegister()
+    {
+        $roles = DB::table('roles')->get();
+        return view('backend.auth.register', compact('roles'));
     }
+
     public function register(Request $request)
     {
-        $user = $request->only('name', 'email', 'password', 'phone');
-        $user["password"] = Hash::make($user["password"]);
-        DB::table('users')->insert($user);
-        return redirect()->route('login');
-    }
 
-    public function logout(){
-        return redirect()->route('login');
+      $response= $this->userService->create($request);
+        return redirect()->route('showFormLogin');
     }
-
 }

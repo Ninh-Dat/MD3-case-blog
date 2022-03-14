@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Blog;
-use App\Repositories\BaseRepository;
+use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BlogModelSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,6 +15,14 @@ class BlogModelSeeder extends Seeder
      */
     public function run()
     {
-        Blog::factory(10)->create();
+        $role= new Role();
+        $role->name = "Admin";
+        $role->save();
+
+        $role= new Role();
+        $role->name = "User";
+        $role->save();
+
+
     }
 }

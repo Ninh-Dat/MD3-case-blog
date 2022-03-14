@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use App\Models\User;
-use App\Repositories\CategoryModel;
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
 //    public $categoryModel;
 //
-//    public function __construct(CategoryModel $categoryModel)
+//    public function __construct(CategoryRepository $categoryModel)
 //    {
 //        $this->categoryModel= $categoryModel;
 //    }

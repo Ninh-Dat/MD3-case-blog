@@ -18,7 +18,7 @@ class CheckRegister
     public function handle(Request $request, Closure $next)
     {
         if ($request->password != $request->confirmPassword){
-            Session::flash('msg',"Password confirmation failed");
+            Session::flash('message',"Password confirmation failed");
             return redirect()->back();
         }
         return $next($request);
