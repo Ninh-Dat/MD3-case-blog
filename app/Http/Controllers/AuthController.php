@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Service\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -25,7 +27,7 @@ class AuthController extends Controller
         if ($this->userService->login($request)){
             return redirect()->route('blogs.index');
         } else {
-            Session::flash('msg', 'Tài khoản, mạt khẩu không đúng');
+            Session::flash('msg', 'Tài khoản, mật khẩu không đúng');
             return redirect()->back();
         }
     }
@@ -42,4 +44,10 @@ class AuthController extends Controller
       $response= $this->userService->create($request);
         return redirect()->route('showFormLogin');
     }
+
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('login');
+    }
+
 }

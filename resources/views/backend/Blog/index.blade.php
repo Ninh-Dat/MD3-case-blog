@@ -1,3 +1,8 @@
+@extends('backend.master')
+        @section('header','Lish Blog')
+        @section('content')
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -52,7 +57,7 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
-
+@endsection
 
 {{--<!doctype html>--}}
 {{--<html lang="en">--}}

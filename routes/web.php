@@ -21,10 +21,10 @@ use Illuminate\Support\Facades\Route;
 
 
 //
-Route::middleware('checkAuth')->group(function (){
+//Route::middleware('checkAuth')->group(function (){
 
     Route::get('/', function () {
-        return view('backend.master ');
+        return view('backend.master');
     });
 
 
@@ -60,7 +60,7 @@ Route::middleware('checkAuth')->group(function (){
         Route::get('{id}/update',[BlogController::class,"edit"])->name('blogs.edit');
 
     });
-});
+//});
 
 
 Route::get("/register",[AuthController::class,'showFormRegister'])->name("showForm");
